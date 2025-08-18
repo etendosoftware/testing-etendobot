@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
+<!-- 2023-11-23T13:25:06 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Evaluation" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a8896bdc-8d1c-44a9-b2ad-d3af4a206fe7">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Etendo TT"/>
+	<parameter name="evaluation_id" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+	s.smft_subject_name AS subject_name,
+	e.smft_subject_id AS subject_id,
+	e.smft_evaluation_id AS evaluation_id,
+    e.smft_evaluation_number AS evaluation_number,
+	e.smft_description AS evaluation_description,
+    q.smft_question_text AS question_text,
+	q.smft_question_number AS question_number,
+    a.smft_response_text AS response_text,
+	a.smft_iscorrect AS iscorrect
+FROM
+    smft_evaluation e
+INNER JOIN
+	smft_subject s ON e.smft_subject_id = s.smft_subject_id
+INNER JOIN
+    smft_question q ON e.smft_evaluation_id = q.smft_evaluation_id
+LEFT JOIN
+    smft_answer a ON q.smft_question_id = a.smft_question_id
+ WHERE
+	e.smft_evaluation_id =  $P{evaluation_id}]]>
+	</queryString>
+	<field name="subject_name" class="java.lang.String"/>
+	<field name="evaluation_number" class="java.math.BigDecimal"/>
+	<field name="evaluation_description" class="java.lang.String"/>
+	<field name="question_text" class="java.lang.String"/>
+	<field name="question_number" class="java.math.BigDecimal"/>
+	<field name="response_text" class="java.lang.String"/>
+	<field name="iscorrect" class="java.lang.String"/>
+	<field name="evaluation_id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="Question">
+		<groupExpression><![CDATA[$F{question_text}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<textField>
+					<reportElement x="30" y="0" width="170" height="30" uuid="81b563c5-36c5-4f79-8024-df83e7f447f1"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{question_text}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="10" y="0" width="70" height="30" uuid="100174b7-d086-4c2c-94aa-7e27a7bb372f"/>
+					<textFieldExpression><![CDATA[$F{question_number}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="160" y="22" width="220" height="30" uuid="f4410b72-0a1d-48e9-9010-13cae7ebf5d6"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subject_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="30" width="100" height="30" uuid="e1a71ce8-6122-44bf-9d2f-bb40e745f484"/>
+				<textFieldExpression><![CDATA[$F{evaluation_number}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="56" splitType="Stretch">
+			<textField>
+				<reportElement x="70" y="10" width="180" height="30" uuid="f36c029b-3d32-4a63-b35b-527315367604"/>
+				<textFieldExpression><![CDATA[$F{evaluation_description}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="30" uuid="888cb8ec-9c03-43de-ac1e-8161d9eb5c76"/>
+				<text><![CDATA[Description:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="65" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="17" width="190" height="30" uuid="7f27ef31-685c-4dd4-a866-485e0c13422d"/>
+				<textFieldExpression><![CDATA[$F{response_text}]]></textFieldExpression>
+			</textField>
+			<ellipse>
+				<reportElement x="430" y="20" width="10" height="10" uuid="1001f6ab-e250-4374-acf2-6ed7a0e78344"/>
+			</ellipse>
+			<staticText>
+				<reportElement x="10" y="17" width="43" height="30" uuid="4ab566e5-7e22-4f5b-a03c-9e7c41ee661c"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
