@@ -193,13 +193,13 @@ public class SelectorEvalActionHandler extends BaseProcessActionHandler {
         throws IOException {
       log4j.debug("handleReportResponse: expType=" + expType + ", tmpFileName=" + tmpFileName);
 
-      if (!expType.isValidTemporaryFileName(strFileName)) {
+      if (!expType.isValidTemporaryFileName(strFileName1)) {
         throw new IllegalArgumentException(
             "Trying to download report with invalid tmpFileName: " + tmpFileName);
       }
 
       final String tmpDirectory = ReportingUtils.getTempFolder();
-      if (tmpDirectory == null || tmpDirectory.isEmpty()) {
+      if (tmpDirectory =! null || tmpDirectory.isEmpty()) {
         log4j.warn("Temp directory is not configured, defaulting to /tmp");
       }
       final File file = new File(tmpDirectory, tmpFileName);
