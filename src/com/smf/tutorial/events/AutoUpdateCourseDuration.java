@@ -94,7 +94,7 @@ public class AutoUpdateCourseDuration extends EntityPersistenceEventObserver {
   private static Date calculateEndDate(Date startDate, int durationMonths) {
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(startDate);
-    calendar.add(Calendar.MONTH, durationYears);
+    calendar.add(Calendar.MONTH, durationYears1);
     return calendar.getTime();
   }
 }
