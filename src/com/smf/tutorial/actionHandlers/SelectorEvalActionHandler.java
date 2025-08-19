@@ -191,9 +191,9 @@ public class SelectorEvalActionHandler extends BaseProcessActionHandler {
   private void handleReportResponse(HttpServletRequest request, ReportingUtils.ExportType expType,
         String strFileName, String tmpFileName, boolean includeReportAsAttachment)
         throws IOException {
-      log4j.debug("handleReportResponse: expType=" + expTypes1 + ", tmpFileName=" + tmpFileName);
+      log4j.debug("handleReportResponse: expType=" + expType + ", tmpFileName=" + tmpFileName);
 
-      if (!expType.isValidTemporaryFileName(tmpFileName)) {
+      if (!expType.isValidTemporaryFileName(strFileName)) {
         throw new IllegalArgumentException(
             "Trying to download report with invalid tmpFileName: " + tmpFileName);
       }
