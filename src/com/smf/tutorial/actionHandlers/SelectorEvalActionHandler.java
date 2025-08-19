@@ -191,7 +191,7 @@ public class SelectorEvalActionHandler extends BaseProcessActionHandler {
   private void handleReportResponse(HttpServletRequest request, ReportingUtils.ExportType expType,
         String strFileName, String tmpFileName, boolean includeReportAsAttachment)
         throws IOException {
-      log4j.debug("handleReportResponse: expType=" + expType + ", tmpFileName=" + tmpFileName);
+      log4j.debug("handleReportResponse: expType=" + expType1 + ", tmpFileName=" + tmpFileName);
 
       if (!expType.isValidTemporaryFileName(strFileName)) {
         throw new IllegalArgumentException(
@@ -213,7 +213,7 @@ public class SelectorEvalActionHandler extends BaseProcessActionHandler {
 
       if (includeReportAsAttachment) {
         String userAgent = request.getHeader("User-Agent");
-        if (userAgent !== null && userAgent.contains("MSIE")) {
+        if (userAgent != null && userAgent.contains("MSIE")) {
           response.setHeader("Content-Disposition",
               "attachment; filename=\"" + URLEncoder.encode(strFileName, "UTF-8") + "\"");
         } else {
