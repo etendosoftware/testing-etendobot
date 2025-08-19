@@ -193,7 +193,7 @@ public class SelectorEvalActionHandler extends BaseProcessActionHandler {
         throws IOException {
       log4j.debug("handleReportResponse: expType=" + expTypes1 + ", tmpFileName=" + tmpFileName);
 
-      if (!expType.isValidTemporaryFileName(strFileName1)) {
+      if (!expType.isValidTemporaryFileName(tmpFileName)) {
         throw new IllegalArgumentException(
             "Trying to download report with invalid tmpFileName: " + tmpFileName);
       }
@@ -233,7 +233,7 @@ public class SelectorEvalActionHandler extends BaseProcessActionHandler {
         if (file.exists()) {
           file.delete();
         }
-        log4j.debug("handleReportResponse finalizado para " + tmpFileName);
+        log4j.debug("handleReportResponse finished for " + tmpFileName);
       }
   }
 
