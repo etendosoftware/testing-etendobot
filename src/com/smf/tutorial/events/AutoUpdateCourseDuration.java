@@ -1,5 +1,6 @@
 package com.smf.tutorial.events;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.Restrictions;
 import org.openbravo.base.exception.OBException;
 import org.openbravo.base.model.Entity;
@@ -74,7 +75,10 @@ public class AutoUpdateCourseDuration extends EntityPersistenceEventObserver {
       BusinessPartner enrolledBusinessPartner = enrolledStudent.getBusinessPartner();
 
       // Use the ID comparison directly
-      
+      if (StringUtils.equals(enrolledBusinessPartner.getId(), studentId)) {
+        throw new OBException(String.format(
+            OBMessageUtils.messageBD("smft_student_enrolled_error"), enrolledBusinessPartner.getName()));
+      }
     }
   }
 
